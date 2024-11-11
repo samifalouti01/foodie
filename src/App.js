@@ -21,7 +21,6 @@ function App() {
   const [cart, setCart] = useState([]);
   const [search, setSearch] = useState('');
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [startTouch, setStartTouch] = useState(0);
   const [deliveryPrice, setDeliveryPrice] = useState(0);
   const [isFormSubmission, setIsFormSubmission] = useState(false);
   const [name, setName] = useState('');
@@ -95,18 +94,6 @@ function App() {
 
   const toggleCart = () => {
     setIsCartOpen(!isCartOpen);
-  };
-
-  const handleTouchStart = (e) => {
-    const touchStart = e.touches[0].clientY;
-    setStartTouch(touchStart);
-  };
-
-  const handleTouchEnd = (e) => {
-    const touchEnd = e.changedTouches[0].clientY;
-    if (startTouch - touchEnd > 50) {
-      setIsCartOpen(false);
-    }
   };
 
   const totalPrice = cart.reduce((sum, item) => sum + item.quantity * item.price, 0).toFixed(2);
@@ -205,8 +192,6 @@ function App() {
       {isCartOpen && (
         <div
           className={`cart-details ${isCartOpen ? 'open' : ''}`}
-          onTouchStart={handleTouchStart}
-          onTouchEnd={handleTouchEnd}
         >
           <div className="cart-header">
             <button className="close-button" onClick={toggleCart}>
