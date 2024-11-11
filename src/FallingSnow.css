@@ -1,0 +1,91 @@
+/* FallingSnow.css */
+
+.falling-snow {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh; 
+    pointer-events: none; 
+    z-index: 999;
+    overflow: hidden;
+}
+
+.snowflake {
+    position: absolute;
+    top: -10%;
+    animation: fall linear infinite;
+    opacity: 0.3;
+}
+
+/* Randomize the position, size, and speed for each image */
+.snowflake0 {
+    top: 10%;
+    animation-duration: 5s;
+    width: 50px;
+    height: 50px;
+}
+.snowflake1 {
+    top: 20%;
+    animation-duration: 7s;
+    width: 30px;
+    height: 30px;
+}
+.snowflake2 {
+    top: 30%;
+    animation-duration: 6s;
+    width: 40px;
+    height: 40px;
+}
+.snowflake3 {
+    top: 40%;
+    animation-duration: 8s;
+    width: 35px;
+    height: 35px;
+}
+.snowflake4 {
+    top: 50%;
+    animation-duration: 9s;
+    width: 45px;
+    height: 45px;
+}
+.snowflake5 {
+    top: 60%;
+    animation-duration: 5s;
+    width: 55px;
+    height: 55px;
+}
+.snowflake6 {
+    top: 70%;
+    animation-duration: 10s;
+    width: 25px;
+    height: 25px;
+}
+.snowflake7 {
+    top: 80%;
+    animation-duration: 6s;
+    width: 50px;
+    height: 50px;
+}
+.snowflake8 {
+    top: 90%;
+    animation-duration: 7s;
+    width: 30px;
+    height: 30px;
+}
+.snowflake9 {
+    top: 95%;
+    animation-duration: 9s;
+    width: 45px;
+    height: 45px;
+}
+
+/* Animation for falling effect (right to left) */
+@keyframes fall {
+    0% {
+        transform: translateX(100vw) rotate(0deg);
+    }
+    100% {
+        transform: translateX(-100vw) rotate(360deg);
+    }
+}
