@@ -5,21 +5,32 @@ import Cart from './Cart';
 import './FallingSnow.css';
 import { IoClose, IoArrowBack, IoCheckmark, IoReload } from 'react-icons/io5';
 
+const categories = [
+  { name: 'Tous', icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQt26bqctlEX0GzWk2Z4cVzztaEa34JpJtHFQ&s' },
+  { name: 'Pizza', icon: 'https://png.pngtree.com/png-clipart/20230407/ourmid/pngtree-pizza-png-image_6675891.png' },
+  { name: 'Tacos', icon: 'https://bbmtacos.fr/wp-content/uploads/2021/10/tacos-1-viande-removebg-preview-e1635431641402.png' },
+  { name: 'Panini', icon: 'https://static.vecteezy.com/system/resources/thumbnails/046/437/705/small_2x/sandwich-transparent-background-png.png' },
+  { name: 'Burger', icon: 'https://png.pngtree.com/png-clipart/20231020/original/pngtree-3d-illustration-cheese-burger-png-image_13381662.png' },
+  { name: 'Chapati', icon: 'https://res.cloudinary.com/dgqpkdeld/image/upload/v1731369314/Untitled_design_1_xpee9l.png' },
+  { name: 'Soufflé', icon: 'https://res.cloudinary.com/dgqpkdeld/image/upload/v1731369616/Untitled_design_2_as4ci2.png'},
+];
+
 function App() {
   const images = [
-    'https://www.zaytunamart.ca/cdn/shop/files/IMG-3891_300x@2x.jpg?v=1709393549',
-    'https://www.zaytunamart.ca/cdn/shop/files/IMG-6055_300x@2x.jpg?v=1723744340',
-    'https://www.zaytunamart.ca/cdn/shop/files/IMG-6475_300x@2x.jpg?v=1726771801',
-    'https://www.zaytunamart.ca/cdn/shop/products/image_b8e5ef98-3b31-421e-a6c6-dfeec994e4dd_300x@2x.png?v=1676481896',
-    'https://www.zaytunamart.ca/cdn/shop/products/image_9df8787e-0ae4-4657-9b2a-ce65a902de50_300x@2x.jpg?v=1618117171',
-    'https://www.zaytunamart.ca/cdn/shop/files/manaroo_300x@2x.jpg?v=1719806633',
-    'https://www.zaytunamart.ca/cdn/shop/files/IMG-4526_300x@2x.jpg?v=1716041415',
-    'https://www.zaytunamart.ca/cdn/shop/products/image_4c241d28-1831-47b0-a6a1-37b6673a8725_300x@2x.jpg?v=1677116817',
-    'https://www.zaytunamart.ca/cdn/shop/files/IMG-3803_300x@2x.jpg?v=1708525128',
-    'https://www.zaytunamart.ca/cdn/shop/files/IMG-3943_300x@2x.png?v=1710046248'
+    "https://png.pngtree.com/png-clipart/20230407/ourmid/pngtree-pizza-png-image_6675891.png",
+    "https://bbmtacos.fr/wp-content/uploads/2021/10/tacos-1-viande-removebg-preview-e1635431641402.png",
+    "https://res.cloudinary.com/dgqpkdeld/image/upload/v1731369314/Untitled_design_1_xpee9l.png",
+    "https://static.vecteezy.com/system/resources/thumbnails/046/437/705/small_2x/sandwich-transparent-background-png.png",
+    "https://png.pngtree.com/png-clipart/20231020/original/pngtree-3d-illustration-cheese-burger-png-image_13381662.png",
+    "https://res.cloudinary.com/dgqpkdeld/image/upload/v1731369314/Untitled_design_1_xpee9l.png",
+    "https://res.cloudinary.com/dgqpkdeld/image/upload/v1731369616/Untitled_design_2_as4ci2.png",
+    "https://png.pngtree.com/png-clipart/20230407/ourmid/pngtree-pizza-png-image_6675891.png",
+    "https://bbmtacos.fr/wp-content/uploads/2021/10/tacos-1-viande-removebg-preview-e1635431641402.png",
+    "https://res.cloudinary.com/dgqpkdeld/image/upload/v1731369314/Untitled_design_1_xpee9l.png"
   ];
+  
   const [cart, setCart] = useState([]);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState('Burger');
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [deliveryPrice, setDeliveryPrice] = useState(0);
   const [isFormSubmission, setIsFormSubmission] = useState(false);
@@ -61,13 +72,13 @@ function App() {
     setDeliveryPrice(Number(event.target.value));
   };
 
-  const handleSearchChange = (e) => {
-    setSearch(e.target.value);
-  };
-
-  const filteredProducts = productsData.filter(product =>
-    product.title.toLowerCase().includes(search.toLowerCase())
+  const filteredProducts = productsData.filter(product => 
+    search === 'Tous' || product.title.toLowerCase().includes(search.toLowerCase())
   );
+
+  const handleCategoryClick = (categoryName) => {
+    setSearch(categoryName === 'Tous' ? '' : categoryName);
+  };
 
   const addToCart = (product) => {
     setCart(prevCart => {
@@ -186,7 +197,7 @@ function App() {
             ))}
       </div>
       <div className='banner'>
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuaED5fK9-lY26yThQkFb5oAEweaCAXS9iZQ&s" alt="banner" />
+        <img src="banner.png" alt="banner" />
       </div>
       <Cart cart={cart} toggleCart={toggleCart} totalPrice={totalPrice} />
       {isCartOpen && (
@@ -242,9 +253,9 @@ function App() {
                 </div>
               )}
               {cart.map(item => (
-                <div className="crt" key={item.id}>
+                <div className="product-card" key={item.id}>
                   <img src={item.image} alt={item.title} className="cart-item-image" />
-                  <p>{item.title}</p>
+                  <h5>{item.title}</h5>
                   <span className="qnt">{item.price} دج</span>
                   <div className="product-controls">
                     <button onClick={() => removeFromCart(item)} className="minus-btn">-</button>
@@ -282,6 +293,19 @@ function App() {
           )}
         </div>
       )}
+      <div className="category-buttons">
+        {categories.map((category) => (
+          <button
+            style={{ direction: 'ltr'}}
+            key={category.name}
+            onClick={() => handleCategoryClick(category.name)}
+            className={`category-button ${search === category.name ? 'active' : ''}`}
+          >
+            <img src={category.icon} alt={category.name} />
+            {category.name}
+          </button>
+        ))}
+      </div>
       <div className="search-bar">
         <button
           className={`refresh-button ${isRotating ? 'rotate' : ''}`}
@@ -293,7 +317,7 @@ function App() {
           type="text"
           placeholder="ابحث عن المنتجات..."
           value={search}
-          onChange={handleSearchChange}
+          onChange={(e) => setSearch(e.target.value)}
         />
       </div>
       <div className="product-list">

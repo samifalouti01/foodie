@@ -3,7 +3,7 @@
   font-family: 'Roboto Mono', monospace;
   direction: rtl;
   text-align: center;
-  padding-bottom: 120px;
+  padding-bottom: 150px;
 }
 
 .search-bar input {
@@ -11,6 +11,7 @@
   padding: 12px;
   border-radius: 20px;
   border: 1px solid #ccc;
+  background-color: white;
   margin-bottom: 20px;
   margin-top: 30px;
   outline: none;
@@ -19,8 +20,9 @@
 
 .product-list {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   gap: 20px;
 }
 
